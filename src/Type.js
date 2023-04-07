@@ -1,5 +1,5 @@
 // Creates checkboxes for each type
-function Type({ currentTypes, setCurrentTypes }) {
+function Type({ currentTypes, setCurrentTypes, setCurrentPage }) {
 
   return (
     <>
@@ -9,6 +9,7 @@ function Type({ currentTypes, setCurrentTypes }) {
           onChange={(e) => {
             setCurrentTypes(currentTypes.map((type) => {
               if (type.english === e.target.value) {
+                setCurrentPage(1)
                 return { ...type, selected: !type.selected }
               } else {
                 return type

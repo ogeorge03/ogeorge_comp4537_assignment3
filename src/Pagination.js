@@ -49,6 +49,8 @@ function Pagination({pokemons, currentPage, setCurrentPage, numPokemons}) {
                 {index + 1}
               </button>
             )
+          } else {
+            return null
           }
 
         })

@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <Type currentTypes={types} setCurrentTypes={setTypes}/>
+      <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
       <h1>Page number {currentPage}</h1>
       <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} />
       <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} numPokemons={numPokemons} />
