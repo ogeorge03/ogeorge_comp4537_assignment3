@@ -38,7 +38,7 @@ function App() {
     <>
       <Search setSearchQuery={setSearchQuery} />
       <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
-      <h1>Page number {currentPage}</h1>
+      {numPokemons === 0 ? <h1>No Pokemon Found</h1>: <h1>Page Number {currentPage}</h1>}
       <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} searchQuery={searchQuery} />
       <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} numPokemons={numPokemons} />
     </>
