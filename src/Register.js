@@ -1,39 +1,39 @@
 import React from 'react'
 import axios from 'axios'
 
-
-function Login({setAccessToken, setRefreshToken}) {
+function Register({setAccessToken, setRefreshToken}) {
 
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
+  const [email, setEmail] = React.useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:5000/login", {
+      const res = await axios.post("http://localhost:5000/register", {
         username: username,
-        password: password
+        password: password,
+        email: email
       })
       setAccessToken(res.headers["auth-token-access"])
       setRefreshToken(res.headers["auth-token-refresh"])
-      document.getElementById("errorLogin").innerHTML = ""
+      document.getElementById("errorRegister").innerHTML = ""
     } catch (err) {
-      document.getElementById("errorLogin").innerHTML = err.response.data
+      document.getElementById("errorRegister").innerHTML = err.response.data
     }
-
-
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
-      <div id="errorLogin"></div>
+      <div id="errorRegister"></div>
     </div>
   )
 }
 
-export default Login
+export default Register

@@ -6,6 +6,7 @@ import Pagination from "./Pagination";
 import Search from "./Search";
 import Login from "./Login";
 import Logout from "./Logout";
+import Register from "./Register";
 
 function App() {
 
@@ -41,7 +42,10 @@ function App() {
 
   return (
     <>
-      {accessToken === "" ? <Login setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} /> :
+      {accessToken === "" ?
+      <><Login setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} />
+      <Register setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} /></>
+       :
         <>
           <Logout />
           <Search setSearchQuery={setSearchQuery} setCurrentPage={setCurrentPage} />
