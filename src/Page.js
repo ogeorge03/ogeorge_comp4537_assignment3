@@ -1,4 +1,6 @@
 import React from 'react'
+import {useState} from 'react'
+import PokemonDetails from './PokemonDetails'
 
 function formatId(id) {
   if (id < 10) {
@@ -45,6 +47,13 @@ function Page({pokemons, currentPage, types, setNumPokemons, searchQuery}) {
   const startIndex = (currentPage - 1) * pageSize
   const endIndex = startIndex + pageSize
   const currentPokemons = pokemons.slice(startIndex, endIndex)
+  // const [showDetails, setShowDetails] = useState(false)
+
+  // showDetails is a map [pokemonId -> boolean]
+  // if showDetails[pokemonId] is true, show the details of the pokemon
+  // if showDetails[pokemonId] is false, hide the details of the pokemon
+  const [showDetails, setShowDetails] = useState({})
+
 
 
 
@@ -55,11 +64,15 @@ function Page({pokemons, currentPage, types, setNumPokemons, searchQuery}) {
     <div className='pokemons'>
       {
         currentPokemons.map((pokemon) => {
+          const imageUrl = "https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" + formatId(pokemon.id) + ".png"
           return (
             <div key={pokemon.id} className="pokemon">
               <h4>{pokemon.name.english}</h4>
-              <img src = {"https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" + formatId(pokemon.id) + ".png"} alt ="NO CRABOMINABLE"
-              width = "100" height = "100" />
+              <img src = {imageUrl} alt ={pokemon.name.english}
+              width = "100" height = "100" onClick={() => setShowDetails((prev) => ({...prev, [pokemon.id]: !prev[pokemon.id]}))} />
+              {
+                showDetails[pokemon.id] && <PokemonDetails pokemon={pokemon} imageUrl={imageUrl} setShowDetails={setShowDetails} />
+              }
             </div>
           )
         }

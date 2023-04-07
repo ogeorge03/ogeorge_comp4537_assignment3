@@ -55,3 +55,23 @@ with different formats for different screen sizes:
   }
 }
 
+#modalClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+/* pokemon-details-image is a div containing an image
+center the image in the div */
+.pokemon-details-image {
+  text-align: center;
+}
+
+.pokemon-details-info {
+  text-align: center;
+}
+

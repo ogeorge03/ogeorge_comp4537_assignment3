@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <Search setSearchQuery={setSearchQuery} />
+      <Search setSearchQuery={setSearchQuery} setCurrentPage={setCurrentPage} />
       <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
       {numPokemons === 0 ? <h1>No Pokemon Found</h1>: <h1>Page Number {currentPage}</h1>}
       <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} searchQuery={searchQuery} />
