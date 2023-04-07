@@ -10,7 +10,7 @@ function formatId(id) {
   }
 }
 
-function Page({pokemons, currentPage, types}) {
+function Page({pokemons, currentPage, types, setNumPokemons}) {
 
   // filter pokemons based on selected types (the pokemon must have all the selected types)
   // if none of the types are selected, return all pokemons
@@ -24,6 +24,7 @@ function Page({pokemons, currentPage, types}) {
       })
     })
   }
+  setNumPokemons(pokemons.length)
 
  // Display max 10 pokemons per page
   const pageSize = 10
