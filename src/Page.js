@@ -12,10 +12,25 @@ function formatId(id) {
 
 function Page({pokemons, currentPage, types}) {
 
+  // filter pokemons based on selected types (the pokemon must have all the selected types)
+  // if none of the types are selected, return all pokemons
+  if (types.some((type) => type.selected)) {
+    pokemons = pokemons.filter((pokemon) => {
+      return types.every((type) => {
+        if (type.selected) {
+          return pokemon.type.includes(type.english)
+        }
+        return true
+      })
+    })
+  }
+
+ // Display max 10 pokemons per page
   const pageSize = 10
   const startIndex = (currentPage - 1) * pageSize
   const endIndex = startIndex + pageSize
   const currentPokemons = pokemons.slice(startIndex, endIndex)
+
 
 
   // <img src = {"https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" + pokemon.id + ".png"} alt = {pokemon.name.english} />

@@ -27,16 +27,14 @@ function App() {
       setTypes(response.data.map((type) => ({ ...type, selected: false })))
     }
     result()
-    console.log("TYpes: ", types)
   }, [])
-
 
 
   return (
     <>
-      <Type />
+      <Type currentTypes={types} setCurrentTypes={setTypes}/>
       <h1>Page number {currentPage}</h1>
-      <Page pokemons={pokemon} currentPage={currentPage} types={[]} />
+      <Page pokemons={pokemon} currentPage={currentPage} types={types} />
       <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>
   );

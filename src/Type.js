@@ -1,27 +1,20 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-
-// Get types of pokemons from API
-// link: https://github.com/fanzeyi/pokemon.json/blob/master/types.json
-
-
 // Creates checkboxes for each type
-function Type() {
-  const [types, setTypes] = useState([])
-
-  useEffect(() => {
-    const result = async () => {
-      const response = await axios.get('https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/types.json')
-      setTypes(response.data)
-    }
-    result()
-  }, [])
+function Type({ currentTypes, setCurrentTypes }) {
 
   return (
     <>
-      {types.map((type) => (
+      {currentTypes.map((type) => (
         <div key={type.id}>
-          <input type="checkbox" id={type.english} name={type.english} value={type.english} />
+          <input type="checkbox" id={type.english} name={type.english} value={type.english} key={type.id}
+          onChange={(e) => {
+            setCurrentTypes(currentTypes.map((type) => {
+              if (type.english === e.target.value) {
+                return { ...type, selected: !type.selected }
+              } else {
+                return type
+              }
+            }))
+          }} />
           <label htmlFor={type.english}>{type.english}</label>
         </div>
       ))}
