@@ -4,6 +4,8 @@ import Type from "./Type";
 import Page from "./Page";
 import Pagination from "./Pagination";
 import Search from "./Search";
+import Login from "./Login";
+import Logout from "./Logout";
 
 function App() {
 
@@ -13,6 +15,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const [numPokemons, setNumPokemons] = useState(0)
   const [searchQuery, setSearchQuery] = useState("")
+
+  const [accessToken, setAccessToken] = useState("")
+  const [refreshToken, setRefreshToken] = useState("")
 
   // geting pokemon data from API
   useEffect(() => {
@@ -36,13 +41,17 @@ function App() {
 
   return (
     <>
-      <Search setSearchQuery={setSearchQuery} setCurrentPage={setCurrentPage} />
-      <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
-      {numPokemons === 0 ? <h1>No Pokemon Found</h1>: <h1>Page Number {currentPage}</h1>}
-      <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} searchQuery={searchQuery} />
-      <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} numPokemons={numPokemons} />
-    </>
+      {accessToken === "" ? <Login setAccessToken={setAccessToken} setRefreshToken={setRefreshToken} /> :
+        <>
+          <Logout />
+          <Search setSearchQuery={setSearchQuery} setCurrentPage={setCurrentPage} />
+          <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
+          {numPokemons === 0 ? <h1>No Pokemon Found</h1>: <h1>Page Number {currentPage}</h1>}
+          <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} searchQuery={searchQuery} />
+          <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} numPokemons={numPokemons} />
+        </>
+  }
+  </>
   );
 }
-
 export default App;
