@@ -10,7 +10,7 @@ function formatId(id) {
   }
 }
 
-function Page({pokemons, currentPage, types, setNumPokemons}) {
+function Page({pokemons, currentPage, types, setNumPokemons, searchQuery}) {
 
   // filter pokemons based on selected types (the pokemon must have all the selected types)
   // if none of the types are selected, return all pokemons
@@ -24,6 +24,20 @@ function Page({pokemons, currentPage, types, setNumPokemons}) {
       })
     })
   }
+
+  if (searchQuery !== "") {
+      // set the query to lowercase
+      // use regex to match the query
+      // for example "Pika" will be  /\w*p\w*i\w*k\w*a\w\w*/i
+      // which will match "Pikachu", "Pikapi", "Pikapika", "Pikapikachu", etc.
+      const query = searchQuery.toLowerCase().split("").join("\\w*") + "\\w*"
+      const regex = new RegExp(query, "i")
+      pokemons = pokemons.filter((pokemon) => {
+        return regex.test(pokemon.name.english)
+      })
+  }
+
+
   setNumPokemons(pokemons.length)
 
  // Display max 10 pokemons per page

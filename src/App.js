@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Type from "./Type";
 import Page from "./Page";
 import Pagination from "./Pagination";
+import Search from "./Search";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   const [types, setTypes] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [numPokemons, setNumPokemons] = useState(0)
+  const [searchQuery, setSearchQuery] = useState("")
 
   // geting pokemon data from API
   useEffect(() => {
@@ -34,9 +36,10 @@ function App() {
 
   return (
     <>
+      <Search setSearchQuery={setSearchQuery} />
       <Type currentTypes={types} setCurrentTypes={setTypes} setCurrentPage={setCurrentPage}/>
       <h1>Page number {currentPage}</h1>
-      <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} />
+      <Page pokemons={pokemon} currentPage={currentPage} types={types} setNumPokemons={setNumPokemons} searchQuery={searchQuery} />
       <Pagination pokemons={pokemon} currentPage={currentPage} setCurrentPage={setCurrentPage} numPokemons={numPokemons} />
     </>
   );
