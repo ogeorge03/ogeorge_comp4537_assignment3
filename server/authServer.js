@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 dotenv.config();
 const userModel = require("./userModel.js")
 const { connectDB } = require("./connectDB.js")
+const cors = require("cors")
 
 const {
   PokemonBadRequest,
@@ -31,6 +32,8 @@ const start = asyncWrapper(async () => {
 start()
 
 app.use(express.json())
+
+app.use(cors())
 
 
 const bcrypt = require("bcrypt")

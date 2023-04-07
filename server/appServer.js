@@ -81,7 +81,14 @@ const authAdmin = asyncWrapper(async (req, res, next) => {
 // app.use(morgan("tiny"))
 app.use(morgan(":method"))
 
-app.use(cors())
+app.use(cors(
+  {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "appid"]
+
+  }
+))
 
 
 app.use(authUser) // Boom! All routes below this line are protected
