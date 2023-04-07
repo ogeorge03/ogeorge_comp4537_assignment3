@@ -1,0 +1,57 @@
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* .pokemons is a div with 10 pokemon
+with different formats for different screen sizes:
+
+- 1 pokemon per row on small screens
+- 2 pokemon per row on medium screens
+- 3 pokemon per row on large screens
+- 4 pokemon per row on extra large screens
+*/
+
+.pokemons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemon {
+  width: 100%;
+  margin: 10px;
+  border: #4CAF50;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 576px) {
+  .pokemon {
+    width: 45%;
+  }
+}
+
+@media (min-width: 768px) {
+  .pokemon {
+    width: 30%;
+  }
+}
+
+@media (min-width: 992px) {
+  .pokemon {
+    width: 22%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pokemon {
+    width: 17%;
+  }
+}
+
