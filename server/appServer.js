@@ -89,6 +89,50 @@ app.use(cors(
 
   }
 ))
+// Gets unique api users over a period of time
+app.get(
+  '/api/v1/uniqueUsers', asyncWrapper(async (req, res) => {
+    // try {
+    // get all users within the last 24 hours
+    // and group them by the hour
+    // each user has a date field that is the time they were created
+    // get all usrs
+    const users = await userModel.find({})
+
+    // get all users within the last 24 hours
+    const usersWithin24Hours = users.filter(user => {
+      const now = new Date()
+      const userDate = new Date(user.date)
+      const diff = now - userDate
+      const diffInHours = diff / 1000 / 60 / 60
+      return diffInHours < 24
+    })
+
+    // group users by the hour into a json object
+    // ex [
+    //   {
+    //     "hour": 00,
+    //     "count": 10
+    //   },
+    //   {
+    //     "hour": 01,
+    //     "count": 5
+    //   }
+    // ]
+    const usersByHour = usersWithin24Hours.reduce((acc, user) => {
+      const userDate = new Date(user.date)
+      const hour = userDate.getHours()
+      if (acc[hour]) {
+        acc[hour] += 1
+      } else {
+        acc[hour] = 1
+      }
+      return acc
+    }, {})
+    res.json(usersByHour)
+    // } catch (err) { res.json(handleErr(err)) }
+  })
+)
 
 
 app.use(authUser) // Boom! All routes below this line are protected
