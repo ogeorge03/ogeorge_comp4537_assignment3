@@ -21,7 +21,7 @@ const asyncWrapper = (fn) => {
         }))
       }
 
-      if (req.method && req.originalUrl && error.pokeErrCode && error.pokeErrCode >= 400 && error.pokeErrCode < 500) {
+      if (req.method && req.originalUrl && error.pokeErrCode && error.pokeErrCode >= 400) {
         errorModel.create({ method: req.method, date: new Date(), status: error.pokeErrCode, endpoint: req.originalUrl })
       }
 

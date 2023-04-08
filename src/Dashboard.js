@@ -8,7 +8,7 @@ import UniqueUsers from './Reports/UniqueUsers'
 function Dashboard({accessToken, refreshToken}) {
   return (
     <div>
-      {/* <Errors4xx /> */}
+      <Errors4xx accessToken={accessToken} refreshToken={refreshToken} />
       <RecentErrors accessToken={accessToken} refreshToken={refreshToken}/>
       {/* <TopEndpoint /> */}
       {/* <TopUsers /> */}
