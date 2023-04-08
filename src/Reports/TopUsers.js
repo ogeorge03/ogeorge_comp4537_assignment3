@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+import Chart from 'chart.js/auto'
 
 
 function TopUsers({accessToken, refreshToken}) {
@@ -42,28 +43,77 @@ function TopUsers({accessToken, refreshToken}) {
     }
   }, [accessToken, refreshToken])
 
+  const data = {
+    labels: topUsers.map(user => user.username),
+    datasets: [
+      {
+        label: 'Top Users',
+        data: topUsers.map(user => user.count),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Count'
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'User'
+          }
+      }
+    }
+  }
+}
+}
+
+  useEffect(() => {
+    const myChart = new Chart(
+      document.getElementById('myTopUsersChart'), {
+        type: 'bar',
+        data: data,
+        options: config
+      }
+    )
+    return () => myChart.destroy()
+  }, [data, config])
+
+
+
+
   return (
     <div>
-      <h1>Top Users</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Count</th>
-              </tr>
-              </thead>
-              <tbody>
-                {topUsers.map((user, index) => (
-                  <tr key={index}>
-                    <td>{user.username}</td>
-                    <td>{user.count}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div id='errorTopUsers'></div>
-
+      <div>
+        <canvas id='myTopUsersChart'></canvas>
+      </div>
+      <div id='errorTopUsers'></div>
     </div>
+
   )
 }
 
