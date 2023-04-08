@@ -44,7 +44,7 @@ function TopEndpoint({accessToken, refreshToken}) {
 
 
   return (
-    <div>
+    <div className="table">
       <h1>Top Endpoint by User</h1>
         <table>
           <thead>

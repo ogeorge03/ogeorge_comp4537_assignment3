@@ -107,7 +107,7 @@ function TopUsers({accessToken, refreshToken}) {
 
 
   return (
-    <div>
+    <div className='canvas'>
       <div>
         <canvas id='myTopUsersChart'></canvas>
       </div>

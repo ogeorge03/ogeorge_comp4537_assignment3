@@ -24,7 +24,7 @@ function RecentErrors({accessToken, refreshToken}) {
   }, [accessToken, refreshToken])
 
   return (
-    <div>
+    <div className="table">
       <h1>Recent 4xx & 5xx Errors</h1>
       <table>
         <thead>

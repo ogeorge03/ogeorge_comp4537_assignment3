@@ -10,11 +10,15 @@ function Dashboard({accessToken, refreshToken}) {
   return (
     <div>
       <Logout />
+      <div className='tables'>
       <Errors4xx accessToken={accessToken} refreshToken={refreshToken} />
       <RecentErrors accessToken={accessToken} refreshToken={refreshToken}/>
       <TopEndpoint accessToken={accessToken} refreshToken={refreshToken} />
+      </div>
+      <div className="canvas">
       <TopUsers accessToken={accessToken} refreshToken={refreshToken} />
       <UniqueUsers accessToken={accessToken} refreshToken={refreshToken} />
+      </div>
     </div>
   )
 }
