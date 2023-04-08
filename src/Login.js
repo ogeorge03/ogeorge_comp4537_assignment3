@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 
-function Login({setAccessToken, setRefreshToken}) {
+function Login({setAccessToken, setRefreshToken, setIsAdmin}) {
 
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
@@ -16,6 +16,7 @@ function Login({setAccessToken, setRefreshToken}) {
       })
       setAccessToken(res.headers["auth-token-access"])
       setRefreshToken(res.headers["auth-token-refresh"])
+      setIsAdmin(res.data.role === "admin")
       document.getElementById("errorLogin").innerHTML = ""
     } catch (err) {
       document.getElementById("errorLogin").innerHTML = err.response.data
