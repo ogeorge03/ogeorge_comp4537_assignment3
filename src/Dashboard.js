@@ -11,7 +11,7 @@ function Dashboard({accessToken, refreshToken}) {
       <Errors4xx accessToken={accessToken} refreshToken={refreshToken} />
       <RecentErrors accessToken={accessToken} refreshToken={refreshToken}/>
       <TopEndpoint accessToken={accessToken} refreshToken={refreshToken} />
-      {/* <TopUsers /> */}
+      <TopUsers accessToken={accessToken} refreshToken={refreshToken} />
       <UniqueUsers accessToken={accessToken} refreshToken={refreshToken} />
     </div>
   )
