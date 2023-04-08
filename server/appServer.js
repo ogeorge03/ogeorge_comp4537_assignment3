@@ -43,7 +43,8 @@ const start = asyncWrapper(async () => {
       method: String,
       date: Date,
       status: Number,
-      endpoint: String
+      endpoint: String,
+      user: String
     }))
   }
 

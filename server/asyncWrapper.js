@@ -17,12 +17,13 @@ const asyncWrapper = (fn) => {
         method: String,
         date: Date,
         status: Number,
-        endpoint: String
+        endpoint: String,
+        user: String
         }))
       }
 
       if (req.method && req.originalUrl && error.pokeErrCode && error.pokeErrCode >= 400) {
-        errorModel.create({ method: req.method, date: new Date(), status: error.pokeErrCode, endpoint: req.originalUrl })
+        errorModel.create({ method: req.method, date: new Date(), status: error.pokeErrCode, endpoint: req.originalUrl, user: req.user ? req.user.username : "user" })
       }
 
       next(error)
