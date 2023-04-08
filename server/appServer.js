@@ -29,12 +29,24 @@ dotenv.config();
 const app = express()
 // const port = 5000
 var pokeModel = null;
+var recentErrors = null;
 
 const start = asyncWrapper(async () => {
   await connectDB({ "drop": false });
   const pokeSchema = await getTypes();
   // pokeModel = await populatePokemons(pokeSchema);
   pokeModel = mongoose.model('pokemons', pokeSchema);
+  recentErrors = mongoose.model.recentErrors;
+
+  if (!mongoose.models.recentErrors) {
+    recentErrors = mongoose.model('recentErrors', new mongoose.Schema({
+      method: String,
+      date: Date,
+      status: Number,
+      endpoint: String
+    }))
+  }
+
 
   app.listen(process.env.pokeServerPORT, (err) => {
     if (err)
@@ -108,17 +120,6 @@ app.get(
       return diffInHours < 24
     })
 
-    // group users by the hour into a json object
-    // ex [
-    //   {
-    //     "hour": 00,
-    //     "count": 10
-    //   },
-    //   {
-    //     "hour": 01,
-    //     "count": 5
-    //   }
-    // ]
     const usersByHour = usersWithin24Hours.reduce((acc, user) => {
       const userDate = new Date(user.date)
       const hour = userDate.getHours()
@@ -130,6 +131,26 @@ app.get(
       return acc
     }, {})
     res.json(usersByHour)
+    // } catch (err) { res.json(handleErr(err)) }
+  })
+)
+
+app.get(
+  '/api/v1/recentErrors', asyncWrapper(async (req, res) => {
+    // try {
+    // get all errors from the recenterrors collection
+    // sort them by date
+
+    // get all errors
+    console.log("Recent errors: " + recentErrors)
+    const errors = await recentErrors.find({})
+    console.log("Errors: " + errors)
+    // only get the ones with status and endpoint
+    const errorsWithStatusAndEndpoint = errors.filter(error => {
+      return error.status && error.endpoint
+    })
+
+    res.json(errorsWithStatusAndEndpoint)
     // } catch (err) { res.json(handleErr(err)) }
   })
 )

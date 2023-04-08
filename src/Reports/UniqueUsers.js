@@ -104,31 +104,6 @@ function UniqueUsers({accessToken, refreshToken}) {
     </div>
   )
 
-
-  // return (
-  //   <div>
-  //     <h2>Unique Users for {date.toLocaleDateString()}</h2>
-  //     <table>
-  //       <thead>
-  //         <tr>
-  //           <th>Hour</th>
-  //           <th>Count</th>
-  //         </tr>
-  //       </thead>
-  //       <tbody>
-  //         {hours.map(hour => {
-  //           return (
-  //             <tr key={hour}>
-  //               <td>{formatHour(hour)}</td>
-  //               <td>{uniqueUsers[hour] ? uniqueUsers[hour] : 0}</td>
-  //             </tr>
-  //           )
-  //         })}
-  //       </tbody>
-  //     </table>
-  //     <div id="errorUniqueUsers"></div>
-  //   </div>
-  // )
 }
 
 export default UniqueUsers

@@ -9,7 +9,7 @@ function Dashboard({accessToken, refreshToken}) {
   return (
     <div>
       {/* <Errors4xx /> */}
-      {/* <RecentErrors /> */}
+      <RecentErrors accessToken={accessToken} refreshToken={refreshToken}/>
       {/* <TopEndpoint /> */}
       {/* <TopUsers /> */}
       <UniqueUsers accessToken={accessToken} refreshToken={refreshToken} />
